@@ -4,23 +4,15 @@ const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute('href')))
   .filter(Boolean);
 
-const setCurrentSection = () => {
-  if (!sections.length) return;
-  const y = window.scrollY + Math.min(window.innerHeight * 0.42, 380);
-  const current = sections.reduce((active, section) => (section.offsetTop <= y ? section : active), sections[0]);
-
+const setCurrentSection = (id) => {
   navLinks.forEach((link) => {
-    const isCurrent = link.getAttribute('href') === `#${current.id}`;
+    const isCurrent = link.getAttribute('href') === `#${id}`;
     if (isCurrent) {
       link.setAttribute('aria-current', 'page');
     } else {
       link.removeAttribute('aria-current');
     }
   });
-};
-
-const setHeaderState = () => {
-  header?.classList.toggle('is-compact', window.scrollY > 16);
 };
 
 const tabs = Array.from(document.querySelectorAll('[data-tab]'));
@@ -43,11 +35,35 @@ tabs.forEach((tab) => {
   });
 });
 
-window.addEventListener('scroll', () => {
-  setCurrentSection();
-  setHeaderState();
-}, { passive: true });
+if ('IntersectionObserver' in window && sections.length) {
+  const sectionObserver = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-window.addEventListener('resize', setCurrentSection);
-setCurrentSection();
-setHeaderState();
+    if (visible) {
+      setCurrentSection(visible.target.id);
+    }
+  }, {
+    rootMargin: '-28% 0px -55% 0px',
+    threshold: [0.12, 0.28, 0.5]
+  });
+
+  sections.forEach((section) => sectionObserver.observe(section));
+}
+
+navLinks.forEach((link) => {
+  link.addEventListener('click', () => setCurrentSection(link.getAttribute('href').slice(1)));
+});
+
+const hero = document.querySelector('.hero');
+if (hero && header && 'IntersectionObserver' in window) {
+  const headerObserver = new IntersectionObserver(([entry]) => {
+    header.classList.toggle('is-compact', !entry.isIntersecting);
+  }, { threshold: 0.18 });
+
+  headerObserver.observe(hero);
+}
+
+const hashTarget = window.location.hash && document.querySelector(window.location.hash);
+setCurrentSection(hashTarget?.id || sections[0]?.id);

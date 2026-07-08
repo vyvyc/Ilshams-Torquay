@@ -2,11 +2,13 @@
 
 Captured and referenced on 2026-07-09.
 
+Updated on 2026-07-09 to replace the visible website photography with original generated commercial-style imagery. The generated image prompts are saved in `image-prompts/`; the finished web assets are `assets/ilshams-hero-generated.jpg`, `assets/ilshams-tearoom-generated.jpg`, `assets/ilshams-afternoon-tea-generated.jpg`, and `assets/ilshams-food-generated.jpg`.
+
 ## Tourism Listing
 
 - English Riviera Ilshams listing: https://www.englishriviera.co.uk/food-and-drink/ilshams-p2918533
 
-Used for: trading/listing name `Ilshams`, address `15a Ilsham Road, Torquay, TQ1 2JG`, coordinates `50.4665908813477, -3.507080078125`, cafe category, description, and food imagery.
+Used for: trading/listing name `Ilshams`, address `15a Ilsham Road, Torquay, TQ1 2JG`, phone `07926 943473`, coordinates `50.4665908813477, -3.507080078125`, cafe category, description, and food imagery context.
 
 ## Local Area Guide
 
@@ -18,7 +20,7 @@ Used for: exterior shopfront photo, Facebook link, and wording that Ilshams is a
 
 - Ilshams page captured from Rolyart / old Weebly content: https://www.rolyart.co.uk/itr.html
 
-Used for: address confirmation, phone `07763 325483`, Facebook link, legacy contact cues, and archived page imagery. The original page references a Weebly preview image host for `shop_orig.png`.
+Used for: address confirmation, legacy phone `07763 325483`, Facebook link, legacy contact cues, and archived page imagery. The live page uses the current English Riviera phone number instead.
 
 ## Food Hygiene Rating
 
